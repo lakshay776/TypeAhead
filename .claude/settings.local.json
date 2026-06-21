@@ -39,7 +39,10 @@
       "Bash(curl -s \"http://localhost:5173/trending\")",
       "Bash(node -e \"let d='';process.stdin.on\\('data',c=>c&&\\(d+=c\\)\\).on\\('end',\\(\\)=>{console.log\\('trending top 3:',JSON.parse\\(d\\).trending.slice\\(0,3\\).map\\(t=>t.query+' \\('+t.score+'\\)'\\)\\)}\\)\")",
       "Bash(curl -s \"http://localhost:5173/src/main.jsx\")",
-      "Bash(curl -s \"http://localhost:3001/suggest?q=test\")"
+      "Bash(curl -s \"http://localhost:3001/suggest?q=test\")",
+      "Bash(curl -s \"http://localhost:3001/suggest?q=mapquest\")",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>c&&\\(d+=c\\)\\).on\\('end',\\(\\)=>{const o=JSON.parse\\(d\\);console.log\\('source:', o.source, '| node:', o.node\\)}\\)\")",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>c&&\\(d+=c\\)\\).on\\('end',\\(\\)=>console.log\\(JSON.stringify\\(JSON.parse\\(d\\),null,2\\)\\)\\)\")"
     ]
   }
 }
