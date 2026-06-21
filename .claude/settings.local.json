@@ -15,7 +15,16 @@
       "Bash(git -C \"c:/Users/jagga/OneDrive/Desktop/2ndYear/hldproject\" check-ignore backend/data/seed.csv)",
       "Bash(node server.js)",
       "PowerShell(Get-NetTCPConnection -LocalPort 3001 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Write-Output \"Killing PID $\\($_.OwningProcess\\)\"; Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; Start-Sleep -Seconds 1; Get-NetTCPConnection -LocalPort 3001 -State Listen -ErrorAction SilentlyContinue | Measure-Object | Select-Object -ExpandProperty Count)",
-      "PowerShell(Get-NetTCPConnection -LocalPort 3001 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; Write-Output \"stopped\")"
+      "PowerShell(Get-NetTCPConnection -LocalPort 3001 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; Write-Output \"stopped\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s \"http://localhost:3001/suggest?q=goog\")",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3001 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; Write-Output \"port freed\")",
+      "Bash(node -e \"const db=require\\('./db'\\); const r=db.prepare\\(\\\\\"SELECT count,recent_count FROM queries WHERE query='pizza'\\\\\"\\).get\\(\\); console.log\\(r||'\\(not present\\)'\\);\")",
+      "Bash(curl -s -X POST \"http://localhost:3001/search\" -H \"Content-Type: application/json\" -d '{\"query\":\"pizza\"}')",
+      "Bash(curl -s -X POST \"http://localhost:3001/search\" -H \"Content-Type: application/json\" -d '{\"query\":\"\"}')",
+      "Bash(curl -s \"http://localhost:3001/metrics\")",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const o=JSON.parse\\(d\\);console.log\\(o.batchWrite\\)}\\)\")",
+      "Bash(node -e \"const db=require\\('./db'\\); console.log\\(db.prepare\\(\\\\\"SELECT count,recent_count FROM queries WHERE query='pizza'\\\\\"\\).get\\(\\)\\);\")"
     ]
   }
 }
