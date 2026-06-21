@@ -1,0 +1,12 @@
+node_modules/
+*.db
+*.db-shm
+*.db-wal
+# NOTE: backend/data/seed.csv (top 100k aggregated queries, ~2MB) IS committed
+# so the repo is self-contained. The raw AOL log below is NOT committed.
+# AOL query log (217MB) — too large for git; downloaded/placed locally
+user-ct-test-collection-*.txt
+*.gz
+dist/
+.DS_Store
+*.log

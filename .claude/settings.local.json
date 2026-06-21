@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"c:/Users/jagga/OneDrive/Desktop/2ndYear/hldproject\" status)",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npm view *)",
+      "Bash(node -e \"console.log\\(process.versions.modules\\)\")",
+      "Bash(node scripts/generateSeed.js)",
+      "Bash(node -e \"const db=require\\('./db'\\); const n=db.prepare\\('SELECT COUNT\\(*\\) n FROM queries'\\).get\\(\\).n; console.log\\('Total queries:',n\\); console.log\\(db.prepare\\(\\\\\"SELECT query,count FROM queries WHERE query LIKE 'iphone%' ORDER BY count DESC LIMIT 5\\\\\"\\).all\\(\\)\\);\")",
+      "Bash(node -e ' *)",
+      "Bash(rm -f typeahead.db typeahead.db-shm typeahead.db-wal data/seed.csv)",
+      "Bash(npm run *)",
+      "Bash(rm -f typeahead.db typeahead.db-shm typeahead.db-wal)",
+      "Bash(git -C \"c:/Users/jagga/OneDrive/Desktop/2ndYear/hldproject\" check-ignore backend/data/seed.csv)"
+    ]
+  }
+}
