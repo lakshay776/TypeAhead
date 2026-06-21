@@ -31,7 +31,15 @@
       "Bash(node -e \"const db=require\\('./db'\\); db.prepare\\(\\\\\"UPDATE queries SET last_searched=datetime\\('now','-2 days'\\) WHERE query='summer concert tickets'\\\\\"\\).run\\(\\); console.log\\('aged. before decay:', db.prepare\\(\\\\\"SELECT recent_count FROM queries WHERE query='summer concert tickets'\\\\\"\\).get\\(\\)\\);\")",
       "Bash(curl -s \"http://localhost:3001/trending?limit=12\")",
       "Bash(node -e \"let d='';process.stdin.on\\('data',c=>c&&\\(d+=c\\)\\).on\\('end',\\(\\)=>{const t=JSON.parse\\(d\\).trending.find\\(x=>x.query==='summer concert tickets'\\); console.log\\('  summer concert tickets now:', t ? \\('recent '+t.recent_count+' | score '+t.score+' | rank within top12'\\) : 'DROPPED OUT of top 12'\\);}\\)\")",
-      "Bash(node -e \"const db=require\\('./db'\\); console.log\\(db.prepare\\(\\\\\"SELECT query,count,recent_count FROM queries WHERE query='summer concert tickets'\\\\\"\\).get\\(\\)\\);\")"
+      "Bash(node -e \"const db=require\\('./db'\\); console.log\\(db.prepare\\(\\\\\"SELECT query,count,recent_count FROM queries WHERE query='summer concert tickets'\\\\\"\\).get\\(\\)\\);\")",
+      "Bash(curl -s \"http://localhost:5173/\")",
+      "Bash(curl -s \"http://localhost:5173/suggest?q=goog\")",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>c&&\\(d+=c\\)\\).on\\('end',\\(\\)=>{const o=JSON.parse\\(d\\);console.log\\('source:',o.source,'| top:',o.suggestions.slice\\(0,3\\).map\\(s=>s.query\\)\\)}\\)\")",
+      "Bash(curl -s -X POST \"http://localhost:5173/search\" -H \"Content-Type: application/json\" -d '{\"query\":\"frontend test query\"}')",
+      "Bash(curl -s \"http://localhost:5173/trending\")",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>c&&\\(d+=c\\)\\).on\\('end',\\(\\)=>{console.log\\('trending top 3:',JSON.parse\\(d\\).trending.slice\\(0,3\\).map\\(t=>t.query+' \\('+t.score+'\\)'\\)\\)}\\)\")",
+      "Bash(curl -s \"http://localhost:5173/src/main.jsx\")",
+      "Bash(curl -s \"http://localhost:3001/suggest?q=test\")"
     ]
   }
 }
