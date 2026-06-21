@@ -33,21 +33,27 @@ const decayStmt = db.prepare(`
     AND recent_count > 0
 `);
 
+// Instead of scoring and sorting all ~1.2M rows on every call, we only rank a
+// small candidate set:
+//   1. the top `limit` rows by all-time count  (these cover every query whose
+//      recent_count is 0, since for them score == count), and
+//   2. every query with recent_count > 0       (the recency-boosted ones).
+// Both branches are index-backed, so the final ORDER BY only sorts a handful
+// of rows rather than the entire table.
 const trendingStmt = db.prepare(`
-  SELECT
-    query,
-    count,
-    recent_count,
-    (count + ? * recent_count) AS score,
-    last_searched
-  FROM queries
+  SELECT query, count, recent_count, (count + ? * recent_count) AS score, last_searched
+  FROM (
+    SELECT * FROM (SELECT * FROM queries ORDER BY count DESC LIMIT ?)
+    UNION
+    SELECT * FROM queries WHERE recent_count > 0
+  )
   ORDER BY score DESC
   LIMIT ?
 `);
 
 function getTrending(limit = 10) {
   decayStmt.run(`-${TIME_WINDOW_HOURS} hours`);
-  return trendingStmt.all(RECENCY_WEIGHT, limit);
+  return trendingStmt.all(RECENCY_WEIGHT, limit, limit);
 }
 
 module.exports = { getTrending, TIME_WINDOW_HOURS, RECENCY_WEIGHT };

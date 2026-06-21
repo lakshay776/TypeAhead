@@ -128,6 +128,13 @@ is still dominated by the big all-time queries unless something gets a lot of fr
 The recency weight pushes recently-searched queries up, but it takes real volume to overtake
 the giants. You can see it by searching a rare query a few dozen times and watching it climb.
 
+To keep this fast, trending doesn't score and sort the whole table. A query with no recent
+activity has a score equal to its all-time count, so the top-by-count rows already cover all
+of those. The only other candidates are queries with recent_count > 0, which is a small set
+(and has its own index). So it ranks the top-by-count rows plus the recently-active ones,
+which is a few rows instead of all 100k. That brought the trending p95 latency down from
+about 33 ms to under 8 ms.
+
 ## Performance
 
 Numbers from `/metrics` after warming up the cache and running a few hundred searches:

@@ -21,6 +21,12 @@ db.exec(`
 
   CREATE INDEX IF NOT EXISTS idx_query_prefix ON queries(query);
   CREATE INDEX IF NOT EXISTS idx_count        ON queries(count DESC);
+
+  -- Partial index over only the recently-active queries. This stays tiny
+  -- (most rows have recent_count = 0) and lets /trending pull recent queries
+  -- without scanning the whole table.
+  CREATE INDEX IF NOT EXISTS idx_recent ON queries(recent_count)
+    WHERE recent_count > 0;
 `);
 
 // Auto-seed from the committed, pre-aggregated CSV (top 100k AOL queries) when
