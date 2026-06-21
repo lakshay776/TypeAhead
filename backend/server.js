@@ -11,9 +11,10 @@ app.use(cors());
 app.use(express.json());
 app.use(latencyMiddleware);
 
-// Routes (trending is mounted in a later step)
+// Routes
 app.use('/suggest', require('./routes/suggest'));
 app.use('/search', require('./routes/search'));
+app.use('/trending', require('./routes/trending'));
 app.use('/cache/debug', require('./routes/cacheDebug'));
 
 // Performance report endpoint (for README screenshots)
@@ -37,6 +38,6 @@ process.on('SIGTERM', shutdown);
 app.listen(PORT, () => {
   console.log(`[Server] Running on http://localhost:${PORT}`);
   console.log(
-    '[Server] APIs: GET /suggest?q= · POST /search · GET /cache/debug?prefix= · GET /metrics'
+    '[Server] APIs: GET /suggest?q= · POST /search · GET /trending · GET /cache/debug?prefix= · GET /metrics'
   );
 });
