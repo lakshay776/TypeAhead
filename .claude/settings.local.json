@@ -12,7 +12,10 @@
       "Bash(rm -f typeahead.db typeahead.db-shm typeahead.db-wal data/seed.csv)",
       "Bash(npm run *)",
       "Bash(rm -f typeahead.db typeahead.db-shm typeahead.db-wal)",
-      "Bash(git -C \"c:/Users/jagga/OneDrive/Desktop/2ndYear/hldproject\" check-ignore backend/data/seed.csv)"
+      "Bash(git -C \"c:/Users/jagga/OneDrive/Desktop/2ndYear/hldproject\" check-ignore backend/data/seed.csv)",
+      "Bash(node server.js)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3001 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Write-Output \"Killing PID $\\($_.OwningProcess\\)\"; Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; Start-Sleep -Seconds 1; Get-NetTCPConnection -LocalPort 3001 -State Listen -ErrorAction SilentlyContinue | Measure-Object | Select-Object -ExpandProperty Count)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3001 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; Write-Output \"stopped\")"
     ]
   }
 }
